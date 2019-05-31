@@ -21,15 +21,17 @@ router.get('/', function(req, res, next) {
 });
 
 var html = fs.readFileSync('views/postnord.ejs', 'utf8');
-console.log(html);
+
 router.post('/start_game', function(req, res) {
     var email = req.body.email;
-    var phone_number = req.body.phone_number;
+    var name = req.body.name;
 
-    console.log("input from user: " + email + ", " + phone_number);
-    // var msg = mailSender.htmlBuilder(final_score);
-    var msg = "Hej med dig";
-    mailSender.sendMail(email, html);
+    console.log("input from user: " + email + ", " + name);
+    var information = {
+        email: email,
+        name: name
+    }
+    mailSender.sendMail(information, html);
     res.redirect('final_page');
 });
 

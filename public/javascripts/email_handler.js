@@ -1,7 +1,7 @@
 var nodemailer = require('nodemailer');
 
 module.exports = {
-    sendMail: function(mailTo, message) {
+    sendMail: function(information, message) {
         //console.log(results);
         var transporter = nodemailer.createTransport({
             service: 'Gmail',
@@ -13,13 +13,13 @@ module.exports = {
 
         var mailOptions = {
             from: 'no.reply.own@gmail.com', //vucfyn.diktat.test@gmail.com
-            to: mailTo,
+            to: information.email,
             subject: 'NO-REPLY',
             // text: message
             html: message,
             attachments: [{
                 filename: 'postnord.jpg',
-                path: 'public/images/postnord.jpg',
+                path: __dirname + 'public/images/postnord.jpg',
                 cid: 'postnord_image' //same cid value as in the html img src
             }]
         };
