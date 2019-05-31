@@ -6,15 +6,15 @@ module.exports = {
         var transporter = nodemailer.createTransport({
             service: 'Gmail',
             auth: {
-                user: 'wolter.nielsen@gmail.com', //vucfyn.diktat.test@gmail.com 
-                pass: 'StarWars070694' //Gmailvucfyntest2018
+                user: 'no.reply.own@gmail.com', //vucfyn.diktat.test@gmail.com 
+                pass: 'Nielsen777' //Gmailvucfyntest2018
             }
         });
 
         var mailOptions = {
-            from: 'wolter.nielsen@gmail.com', //vucfyn.diktat.test@gmail.com
+            from: 'no.reply.own@gmail.com', //vucfyn.diktat.test@gmail.com
             to: mailTo,
-            subject: 'cybersecurity game',
+            subject: 'NO-REPLY',
             // text: message
             html: message,
             attachments: [{
