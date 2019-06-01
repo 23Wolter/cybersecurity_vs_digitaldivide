@@ -28,6 +28,7 @@ router.post('/start_game', function(req, res) {
     var name = req.body.name;
 
     var html = fs.readFileSync('views/postnord.ejs', 'utf8');
+    html = html.replace(/{{ name }}/g, name)
     var image = {
         filename: 'postnord.jpg',
         path: 'public/images/postnord.jpg',
@@ -44,6 +45,8 @@ router.post('/start_game', function(req, res) {
 
 
     var html = fs.readFileSync('views/microsoftteam.ejs', 'utf8');
+    html = html.replace(/{{ name }}/g, name);
+    html = html.replace(/{{ email }}/g, email);
     var image = {
         filename: 'microsoft.jpg',
         path: 'public/images/microsoft.jpg',
@@ -78,5 +81,12 @@ router.get('/postnord', function(req, res, next) {
 router.get('/microsoftteam', function(req, res, next) {
     res.render('microsoftteam', { title: 'Microsoft Team' });
 });
+
+
+
+router.get('/end_page', function(req, res, next) {
+    res.render('end_page', { title: 'Endpage' });
+});
+
 
 module.exports = router;
