@@ -9,7 +9,7 @@ const nexmo = new Nexmo({
     apiSecret: 'AwipZDfIMy81UppX'
 });
 
-const from = 'Nexmo';
+const from = 'Oliver';
 
 
 router.get('/', function(req, res, next) {
@@ -138,19 +138,12 @@ router.post('/postnord_end', function(req, res) {
 
     console.log(mobile_number);
 
-    var to_1 = '45' + mobile_number;
-    const text_1 = 'Heeey ' + cookieval.name + `. Jeg fandt den her side der kan vise præcis hvad der skete på dato du blev født. 
-                Jeg er åbenbart født den samme dag som da vi mistede Kurt Cobain. 
-                Prøv det selv her localhost:3000/what_happened`;
-
-    nexmo.message.sendSms(from, to_1, text_1);
-
     var to_2 = '45' + mobile_number;
-    var text_2 = 'Hej ' + cookieval.name + `. Jeg kan se du har lagt et nyt billede op på din Facebook 
-                localhost:3000/social_media.
-                Det er et mega godt billede`;
+    var text_2 = 'Hej ' + cookieval.name + `. Jeg kan se du har lagt et billede op på Facebook 
+                https://cybersecurity-vs-digitaldivide.herokuapp.com/social_media`;
 
     nexmo.message.sendSms(from, to_2, text_2);
+
 
     res.redirect('create_password');
 });
@@ -173,6 +166,14 @@ router.post('/microsoftteam_end', function(req, res) {
     var cookieval = req.cookies.user;
     cookieval.address = address;
     res.cookie('user', cookieval);
+
+    var mobile_number = cookieval.mobile_number;
+    if (mobile_number) {
+        var to_1 = '45' + mobile_number;
+        var text_1 = 'Heeey ' + cookieval.name + '. Se her hvad der skete den dag du blev født https://cybersecurity-vs-digitaldivide.herokuapp.com/what_happened';
+
+        nexmo.message.sendSms(from, to_1, text_1);
+    }
 
     res.redirect('create_password');
 });
@@ -204,21 +205,12 @@ router.get('/social_media', function(req, res, next) {
 });
 
 router.post('/social_media', function(req, res) {
-    var pet = req.body.pet;
-    var child = req.body.child;
-
-    var image_of = (pet == "" && child != "") ? "child" : "";
-    image_of = (child == "" && pet != "") ? "pet" : "";
+    var image_of = req.body.image_of;
+    var name = req.body.name;
 
     var cookieval = req.cookies.user;
     cookieval.image_of = image_of;
-
-    if (image_of == "pet") {
-        cookieval.pet = pet;
-    } else if (image_of == "child") {
-        cookieval.child = child;
-    }
-
+    cookieval.image_of_name = name;
     res.cookie('user', cookieval);
 
     res.redirect('create_password');
@@ -236,14 +228,14 @@ router.post('/create_password', function(req, res) {
     var password = req.body.password1;
 
     var cookieval = req.cookies.user;
+    var passwords = cookieval.passwords;
 
-    var cookie_password = cookieval.passwords;
-    if (!cookie_password) {
-        var passwords = [password];
-        cookieval.password = passwords;
-    } else {
-        cookieval.passwords.push(password);
-    }
+    if (passwords == undefined) passwords = [];
+
+    passwords.push(password);
+    cookieval.passwords = passwords;
+    console.log(cookieval);
+    res.cookie('user', cookieval);
 
     if (cookieval.success) {
         res.redirect('final_page');
@@ -266,6 +258,7 @@ router.get('/wait_page', function(req, res, next) {
 router.get('/final_page', function(req, res, next) {
 
     var cookieval = req.cookies.user;
+    console.log(cookieval);
 
     res.render('final_page', {
         title: 'Finalpage',

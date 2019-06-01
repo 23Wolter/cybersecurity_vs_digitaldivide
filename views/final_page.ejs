@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 
 <head>
@@ -9,10 +8,33 @@
 </head>
 
 <body>
-    <h1>Tak for spillet</h1>
-    <p>
-        <%= data.passwords %>
-    </p>
+    <h1>Tak for spillet
+        <%= data.name %>
+    </h1>
+    <h2>Lad os se hvordan du klarede det.</h2>
+
+    <p>Du har oprettet
+        <%= data.passwords.length %> kodeord</p>
+    <p>Dine kodeord er:</p>
+    <ul>
+        <% for(var i=0; i<data.passwords.length; i++) { %>
+            <li>
+                <%= data.passwords[i] %>
+            </li>
+            <% } %>
+    </ul>
+
+    <p>Hvor sikre er dine kordeord? Følger de disse gode råd:</p>
+    <ol>
+        <li>Brug både store og små bogstaver</li>
+        <li>Brug både bogstaver og tal</li>
+        <li>Brug helst sætninger frem for ord</li>
+        <li>Brug stavefejl</li>
+        <li>Brug forskellige kodeord</li>
+        <li>Brug forskellig længde kodeord</li>
+        <li>Kodeordet skal helst være 8 tegn eller over</li>
+    </ol>
+
 </body>
 
 </html>

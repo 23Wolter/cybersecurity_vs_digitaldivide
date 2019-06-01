@@ -9,8 +9,8 @@
 </head>
 
 <body>
-    <div style="width:100%">
-        <img src="public/images/facebook.jpg">
+    <div style="width:100%; background-color: #4167B2">
+        <img style="margin-left: 10vw;" src="/images/facebook.jpg">
     </div>
 
     <h2>Denne side representerer din Facebook væg.</h2>
@@ -18,40 +18,17 @@
     <p><i>Det er valgfrit at uploade et billede - det vil ikke blive gemt</i></p>
 
     <input type="file"><br>
-    <p>Her kan du vælge hvad du vil uploade et billede af.</p>
-    <select id="image_of" onchange="change_input()">
-        <option value="pet">Mit kæledyr</option>
-        <option value="child">Mit barn</option>
-    </select>
 
     <form method="post" action="/social_media">
-        <input id="pet" type="text" name="pet" placeholder="Skriv navnet på dit kæledyr her" hidden>
-        <input id="child" type="text" name="child" placeholder="Skriv navnet på dit barn her" hidden>
-        <input id="submit" type="submit" hidden>
+        <p>Her kan du vælge hvad du har uploadet et billede af. Husk at skriv navnet bagefter.</p>
+        <select name="image_of">
+            <option name="pet">Kæledyr</option>
+            <option name="child">Barn</option>
+        </select>
+        <input type="text" name="name" placeholder="Skriv navnet her">
+        <input type="submit">
     </form>
 
-
-    <script>
-        function change_input() {
-            var e = document.getElementById("image_of");
-            var value = e.options[e.selectedIndex].value;
-            var child = document.getElementById("child");
-            var pet = document.getElementById("pet");
-            var submit = document.getElementById("submit");
-
-            if (value == "pet") {
-                child.value = "";
-                child.style.visibility = "hidden";
-                pet.style.visibility = "visible";
-                submit.style.visibility = "visible";
-            } else if (value == "child") {
-                pet.value = "";
-                pet.style.visibility = "hidden";
-                child.style.visibility = "visible";
-                submit.style.visibility = "visible";
-            }
-        }
-    </script>
 </body>
 
 </html>
