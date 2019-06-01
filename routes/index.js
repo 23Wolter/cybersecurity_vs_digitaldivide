@@ -105,6 +105,8 @@ router.post('/tilmelding_end', function(req, res) {
     cookieval.success = true;
     res.cookie('user', cookieval);
 
+    console.log(cookieval);
+
     res.redirect('create_password');
 });
 
@@ -112,6 +114,8 @@ router.post('/tilmelding_end', function(req, res) {
 router.get('/game_start', function(req, res, next) {
     res.render('game_start', { title: 'Spillet er igang' });
 });
+
+
 
 
 
@@ -130,6 +134,8 @@ router.post('/postnord_end', function(req, res) {
     var cookieval = req.cookies.user;
     cookieval.mobile_number = mobile_number;
     res.cookie('user', cookieval);
+
+    console.log(mobile_number);
 
     var from = 'Nexmo';
     var to = '45' + mobile_number;
@@ -223,7 +229,7 @@ router.post('/social_media', function(req, res) {
 
 
 
-// GAME BRANCH 1, 2, AND 3 CONNECTS
+// GAME BRANCH 1, 2, 3, 4, AND 5 CONNECTS
 router.get('/create_password', function(req, res, next) {
     res.render('create_password', { title: 'Opret adgangskode' });
 });
