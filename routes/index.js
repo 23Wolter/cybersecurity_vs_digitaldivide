@@ -20,28 +20,63 @@ router.get('/', function(req, res, next) {
     res.render('index', { title: 'Startpage' });
 });
 
-var html = fs.readFileSync('views/postnord.ejs', 'utf8');
+
+
 
 router.post('/start_game', function(req, res) {
     var email = req.body.email;
     var name = req.body.name;
 
-    console.log("input from user: " + email + ", " + name);
-    var information = {
-        email: email,
-        name: name
+    var html = fs.readFileSync('views/postnord.ejs', 'utf8');
+    var image = {
+        filename: 'postnord.jpg',
+        path: 'public/images/postnord.jpg',
+        cid: 'postnord_image' //same cid value as in the html img src
     }
-    mailSender.sendMail(information, html);
+
+    var mail_data = {
+        email: email,
+        name: name,
+        html: html,
+        image: image
+    }
+    mailSender.sendMail(mail_data);
+
+
+    var html = fs.readFileSync('views/microsoftteam.ejs', 'utf8');
+    var image = {
+        filename: 'microsoft.jpg',
+        path: 'public/images/microsoft.jpg',
+        cid: 'microsoft_image' //same cid value as in the html img src
+    }
+
+    var mail_data = {
+        email: email,
+        name: name,
+        html: html,
+        image: image
+    }
+    mailSender.sendMail(mail_data);
+
     res.redirect('final_page');
 });
+
+
 
 
 router.get('/final_page', function(req, res, next) {
     res.render('final_page', { title: 'Finalpage' });
 });
 
+
+
 router.get('/postnord', function(req, res, next) {
     res.render('postnord', { title: 'Post Nord' });
+});
+
+
+router.get('/microsoftteam', function(req, res, next) {
+    res.render('microsoftteam', { title: 'Microsoft Team' });
 });
 
 module.exports = router;
