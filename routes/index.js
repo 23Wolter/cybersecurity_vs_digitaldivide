@@ -140,7 +140,7 @@ router.post('/postnord_end', function(req, res) {
 
     var to_2 = '45' + mobile_number;
     var text_2 = 'Hej ' + cookieval.name + `. Jeg kan se du har lagt et billede op på Facebook 
-                https://cybersecurity-vs-digitaldivide.herokuapp.com/social_media`;
+                https://c-vs-dd.herokuapp.com/social_media`;
 
     nexmo.message.sendSms(from, to_2, text_2);
 
@@ -170,7 +170,7 @@ router.post('/microsoftteam_end', function(req, res) {
     var mobile_number = cookieval.mobile_number;
     if (mobile_number) {
         var to_1 = '45' + mobile_number;
-        var text_1 = 'Heeey ' + cookieval.name + '. Se her hvad der skete den dag du blev født https://cybersecurity-vs-digitaldivide.herokuapp.com/what_happened';
+        var text_1 = 'Heeey ' + cookieval.name + '. Se her hvad der skete den dag du blev født https://c-vs-dd.herokuapp.com/what_happened';
 
         nexmo.message.sendSms(from, to_1, text_1);
     }
