@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Facebook
+    </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            function change_input() {
+                var val = $('#image_of option:selected').val();
+                if (val == "pet") {
+                    $('#child').val("");
+                    $('#child').hide();
+                    $('#pet').show();
+                    $('#submit').show();
+                } else if (val == "child") {
+                    $('#pet').val("");
+                    $('#pet').hide();
+                    $('#child').show();
+                    $('#submit').show();
+                }
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <div style="width:100%">
+        <img src="/public/images/facebook.jpg">
+    </div>
+
+    <h2>Denne side representerer din Facebook væg.</h2>
+    <h2>Du skal uploade et billede af dit kæledyr eller dit barn og skrive en kommentar.</h2>
+    <p><i>Det er valgfrit at uploade et billede - det vil ikke blive gemt</i></p>
+
+    <input type="file"><br>
+    <p>Her kan du vælge hvad du vil uploade et billede af.</p>
+    <select id="image_of" onchange="change_input()">
+        <option value="pet">Mit kæledyr</option>
+        <option value="child">Mit barn</option>
+    </select>
+
+    <form method="post" action="/social_media">
+        <input id="pet" type="text" name="pet" placeholder="Skriv navnet på dit kæledyr her" hidden>
+        <input id="child" type="text" name="child" placeholder="Skriv navnet på dit barn her" hidden>
+        <input id="submit" type="submit" hidden>
+    </form>
+</body>
+
+</html>
