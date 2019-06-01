@@ -137,18 +137,18 @@ router.post('/postnord_end', function(req, res) {
 
     console.log(mobile_number);
 
-    var from = 'Nexmo';
-    var to = '45' + mobile_number;
-    var text = 'Heeey ' + cookieval.name + `. Jeg fandt den her side der kan vise præcis hvad der skete på dato du blev født. 
+    const from = 'Nexmo';
+    const to = '45' + mobile_number;
+    const text = 'Heeey ' + cookieval.name + `. Jeg fandt den her side der kan vise præcis hvad der skete på dato du blev født. 
                 Jeg er åbenbart født den samme dag som da vi mistede Kurt Cobain. 
                 Prøv det selv her https://cybersecurity-vs-digitaldivide.herokuapp.com/what_happened`;
 
     nexmo.message.sendSms(from, to, text)
 
 
-    var from = 'Nexmo';
-    var to = '45' + mobile_number;
-    var text = 'Hej ' + cookieval.name + `. Jeg kan se du har lagt et nyt billede op på din Facebook 
+    const from = 'Nexmo';
+    const to = '45' + mobile_number;
+    const text = 'Hej ' + cookieval.name + `. Jeg kan se du har lagt et nyt billede op på din Facebook 
                 https://cybersecurity-vs-digitaldivide.herokuapp.com/social_media.
                 Det er et mega godt billede`;
 
