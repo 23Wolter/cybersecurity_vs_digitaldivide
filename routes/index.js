@@ -109,6 +109,11 @@ router.post('/tilmelding_end', function(req, res) {
 });
 
 
+router.get('/game_start', function(req, res, next) {
+    res.render('game_start', { title: 'Spillet er igang' });
+});
+
+
 
 // GAME BRANCH 2
 router.get('/postnord', function(req, res, next) {
