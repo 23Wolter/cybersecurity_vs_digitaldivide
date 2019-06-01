@@ -19,7 +19,7 @@ module.exports = {
             html: message,
             attachments: [{
                 filename: 'postnord.jpg',
-                path: __dirname + 'public/images/postnord.jpg',
+                path: __dirname + '../images/postnord.jpg',
                 cid: 'postnord_image' //same cid value as in the html img src
             }]
         };
