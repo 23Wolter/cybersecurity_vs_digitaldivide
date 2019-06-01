@@ -14,7 +14,8 @@
                 event.preventDefault();
 
                 var con = confirm(`Dette spil benytter sig af cookies til at gemme de oplysninger du giver. 
-                        Alle cookies vil blive slettet efter spillet.`);
+                        Alle cookies vil blive slettet efter spillet.
+                        Vil du fortsætte?`);
 
                 if (con) $(this).unbind('submit').submit(); // continue the submit unbind preventDefault
             });
