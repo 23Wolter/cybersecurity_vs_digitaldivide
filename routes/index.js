@@ -49,66 +49,7 @@ router.post('/start_game', function(req, res) {
     }
     mailSender.sendMail(mail_data);
 
-
-    var html = fs.readFileSync('views/microsoftteam.ejs', 'utf8');
-    html = html.replace(/{{ name }}/g, name);
-    html = html.replace(/{{ email }}/g, email);
-    var image = {
-        filename: 'microsoft.jpg',
-        path: 'public/images/microsoft.jpg',
-        cid: 'microsoft_image' //same cid value as in the html img src
-    }
-
-    var mail_data = {
-        email: email,
-        name: name,
-        html: html,
-        image: image
-    }
-    mailSender.sendMail(mail_data);
-
-
-    var html = fs.readFileSync('views/tilmelding.ejs', 'utf8');
-    html = html.replace(/{{ name }}/g, name);
-    var image = {
-        filename: 'sdu.jpg',
-        path: 'public/images/sdu.jpg',
-        cid: 'sdu_image' //same cid value as in the html img src
-    }
-
-    var mail_data = {
-        email: email,
-        name: name,
-        html: html,
-        image: image
-    }
-    mailSender.sendMail(mail_data);
-
     res.redirect('game_start');
-});
-
-
-
-
-
-//GAME BRANCH 1
-router.get('/tilmelding', function(req, res, next) {
-    res.render('tilmelding', { title: 'Tak for tilmeldelse' });
-});
-
-router.get('/tilmelding_end', function(req, res, next) {
-    res.render('tilmelding_end', { title: 'Postnord End' });
-});
-
-router.post('/tilmelding_end', function(req, res) {
-
-    var cookieval = req.cookies.user;
-    cookieval.success = true;
-    res.cookie('user', cookieval);
-
-    console.log(cookieval);
-
-    res.redirect('create_password');
 });
 
 
@@ -120,7 +61,7 @@ router.get('/game_start', function(req, res, next) {
 
 
 
-// GAME BRANCH 2
+// GAME PART 1
 router.get('/postnord', function(req, res, next) {
     res.render('postnord', { title: 'Post Nord' });
 });
@@ -145,13 +86,31 @@ router.post('/postnord_end', function(req, res) {
     nexmo.message.sendSms(from, to_2, text_2);
 
 
+    var html = fs.readFileSync('views/microsoftteam.ejs', 'utf8');
+    html = html.replace(/{{ name }}/g, name);
+    html = html.replace(/{{ email }}/g, email);
+    var image = {
+        filename: 'microsoft.jpg',
+        path: 'public/images/microsoft.jpg',
+        cid: 'microsoft_image' //same cid value as in the html img src
+    }
+
+    var mail_data = {
+        email: email,
+        name: name,
+        html: html,
+        image: image
+    }
+    mailSender.sendMail(mail_data);
+
+
     res.redirect('create_password');
 });
 
 
 
 
-// GAME BRANCH 3
+// GAME PART 2
 router.get('/microsoftteam', function(req, res, next) {
     res.render('microsoftteam', { title: 'Microsoft Team' });
 });
@@ -175,13 +134,52 @@ router.post('/microsoftteam_end', function(req, res) {
         nexmo.message.sendSms(from, to_1, text_1);
     }
 
+
+    var html = fs.readFileSync('views/tilmelding.ejs', 'utf8');
+    html = html.replace(/{{ name }}/g, name);
+    var image = {
+        filename: 'sdu.jpg',
+        path: 'public/images/sdu.jpg',
+        cid: 'sdu_image' //same cid value as in the html img src
+    }
+
+    var mail_data = {
+        email: email,
+        name: name,
+        html: html,
+        image: image
+    }
+    mailSender.sendMail(mail_data);
+
     res.redirect('create_password');
 });
 
 
 
 
-//GAME BRANCH 4
+//GAME PART 3
+router.get('/tilmelding', function(req, res, next) {
+    res.render('tilmelding', { title: 'Tak for tilmeldelse' });
+});
+
+router.get('/tilmelding_end', function(req, res, next) {
+    res.render('tilmelding_end', { title: 'Postnord End' });
+});
+
+router.post('/tilmelding_end', function(req, res) {
+
+    var cookieval = req.cookies.user;
+    cookieval.success = true;
+    res.cookie('user', cookieval);
+
+    console.log(cookieval);
+
+    res.redirect('create_password');
+});
+
+
+
+//GAME PART 4
 router.get('/what_happened', function(req, res, next) {
     res.render('what_happened', { title: 'What Happened' });
 });
@@ -199,7 +197,7 @@ router.post('/what_happened', function(req, res) {
 
 
 
-//GAME BRANCH 5
+//GAME PART 5
 router.get('/social_media', function(req, res, next) {
     res.render('social_media', { title: 'Facebook' });
 });
@@ -219,7 +217,7 @@ router.post('/social_media', function(req, res) {
 
 
 
-// GAME BRANCH 1, 2, 3, 4, AND 5 CONNECTS
+// GAME PART 1, 2, 3, 4, AND 5 CONNECTS
 router.get('/create_password', function(req, res, next) {
     res.render('create_password', { title: 'Opret adgangskode' });
 });
@@ -246,7 +244,6 @@ router.post('/create_password', function(req, res) {
 
 
 
-
 router.get('/wait_page', function(req, res, next) {
     res.render('wait_page', { title: 'Waitpage' });
 });
@@ -254,11 +251,12 @@ router.get('/wait_page', function(req, res, next) {
 
 
 
-
+//GAME FINAL PART
 router.get('/final_page', function(req, res, next) {
 
     var cookieval = req.cookies.user;
-    console.log(cookieval);
+
+    res.cookie('user', '', { expires: new Date(0) });
 
     res.render('final_page', {
         title: 'Finalpage',

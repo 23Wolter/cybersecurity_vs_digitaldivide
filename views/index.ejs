@@ -6,11 +6,25 @@
         <%= title %>
     </title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+
+            $('#form').bind('submit', function(event) {
+                event.preventDefault();
+
+                var con = confirm(`Dette spil benytter sig af cookies til at gemme de oplysninger du giver. 
+                        Alle cookies vil blive slettet efter spillet.`);
+
+                if (con) $(this).unbind('submit').submit(); // continue the submit unbind preventDefault
+            });
+        });
+    </script>
 </head>
 
 <body>
     <h1>Dette er en interaktiv oplevelse i hvordan man agerer sikkert på internettet.</h1>
-    <h2>I løbet af spillet vil du modtage emails og sms'er, hvor du skal tænke kritisk over hvilke links der er okay at klikke på.</h2>
+    <h2>I løbet af spillet vil du modtage emails og sms'er, hvor du skal tænke kritisk over hvilke links, der er okay at klikke på.</h2>
     <h2>Links som modtages på sms skal åbnes på din computer</h2>
 
     <p>Indtast informationerne herunder, så begynder spillet.</p>
