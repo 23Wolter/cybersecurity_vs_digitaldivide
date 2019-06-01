@@ -74,10 +74,12 @@ router.post('/postnord_end', function(req, res) {
     var mobile_number = req.body.mobile_number;
 
     var cookieval = req.cookies.user;
+    var name = cookieval.name;
+    var email = cookieval.email;
+
     cookieval.mobile_number = mobile_number;
     res.cookie('user', cookieval);
 
-    console.log(mobile_number);
 
     var to_2 = '45' + mobile_number;
     var text_2 = 'Hej ' + cookieval.name + `. Jeg kan se du har lagt et billede op på Facebook 
@@ -123,6 +125,9 @@ router.post('/microsoftteam_end', function(req, res) {
     var address = req.body.address;
 
     var cookieval = req.cookies.user;
+    var name = cookieval.name;
+    var email = cookieval.email;
+
     cookieval.address = address;
     res.cookie('user', cookieval);
 
