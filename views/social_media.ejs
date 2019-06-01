@@ -6,30 +6,11 @@
         Facebook
     </title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            function change_input() {
-                var val = $('#image_of option:selected').val();
-                if (val == "pet") {
-                    $('#child').val("");
-                    $('#child').hide();
-                    $('#pet').show();
-                    $('#submit').show();
-                } else if (val == "child") {
-                    $('#pet').val("");
-                    $('#pet').hide();
-                    $('#child').show();
-                    $('#submit').show();
-                }
-            }
-        });
-    </script>
 </head>
 
 <body>
     <div style="width:100%">
-        <img src="/public/images/facebook.jpg">
+        <img src="public/images/facebook.jpg">
     </div>
 
     <h2>Denne side representerer din Facebook væg.</h2>
@@ -48,6 +29,29 @@
         <input id="child" type="text" name="child" placeholder="Skriv navnet på dit barn her" hidden>
         <input id="submit" type="submit" hidden>
     </form>
+
+
+    <script>
+        function change_input() {
+            var e = document.getElementById("image_of");
+            var value = e.options[e.selectedIndex].value;
+            var child = document.getElementById("child");
+            var pet = document.getElementById("pet");
+            var submit = document.getElementById("submit");
+
+            if (value == "pet") {
+                child.value = "";
+                child.style.visibility = "hidden";
+                pet.style.visibility = "visible";
+                submit.style.visibility = "visible";
+            } else if (value == "child") {
+                pet.value = "";
+                pet.style.visibility = "hidden";
+                child.style.visibility = "visible";
+                submit.style.visibility = "visible";
+            }
+        }
+    </script>
 </body>
 
 </html>

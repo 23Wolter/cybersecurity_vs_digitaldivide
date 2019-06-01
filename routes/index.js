@@ -9,6 +9,7 @@ const nexmo = new Nexmo({
     apiSecret: 'AwipZDfIMy81UppX'
 });
 
+const from = 'Nexmo';
 
 
 router.get('/', function(req, res, next) {
@@ -137,22 +138,19 @@ router.post('/postnord_end', function(req, res) {
 
     console.log(mobile_number);
 
-    const from = 'Nexmo';
-    const to = '45' + mobile_number;
-    const text = 'Heeey ' + cookieval.name + `. Jeg fandt den her side der kan vise præcis hvad der skete på dato du blev født. 
+    var to_1 = '45' + mobile_number;
+    const text_1 = 'Heeey ' + cookieval.name + `. Jeg fandt den her side der kan vise præcis hvad der skete på dato du blev født. 
                 Jeg er åbenbart født den samme dag som da vi mistede Kurt Cobain. 
-                Prøv det selv her https://cybersecurity-vs-digitaldivide.herokuapp.com/what_happened`;
+                Prøv det selv her localhost:3000/what_happened`;
 
-    nexmo.message.sendSms(from, to, text)
+    nexmo.message.sendSms(from, to_1, text_1);
 
-
-    const from = 'Nexmo';
-    const to = '45' + mobile_number;
-    const text = 'Hej ' + cookieval.name + `. Jeg kan se du har lagt et nyt billede op på din Facebook 
-                https://cybersecurity-vs-digitaldivide.herokuapp.com/social_media.
+    var to_2 = '45' + mobile_number;
+    var text_2 = 'Hej ' + cookieval.name + `. Jeg kan se du har lagt et nyt billede op på din Facebook 
+                localhost:3000/social_media.
                 Det er et mega godt billede`;
 
-    nexmo.message.sendSms(from, to, text)
+    nexmo.message.sendSms(from, to_2, text_2);
 
     res.redirect('create_password');
 });
@@ -248,12 +246,7 @@ router.post('/create_password', function(req, res) {
     }
 
     if (cookieval.success) {
-        res.redirect(url.format({
-            pathname: '/final_page',
-            query: {
-                'data': cookieval
-            }
-        }));
+        res.redirect('final_page');
     } else {
         res.redirect('wait_page');
     }
@@ -272,7 +265,7 @@ router.get('/wait_page', function(req, res, next) {
 
 router.get('/final_page', function(req, res, next) {
 
-    var cookieval = req.query.data;
+    var cookieval = req.cookies.user;
 
     res.render('final_page', {
         title: 'Finalpage',
