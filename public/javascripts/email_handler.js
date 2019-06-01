@@ -16,12 +16,12 @@ module.exports = {
             to: information.email,
             subject: 'NO-REPLY',
             // text: message
-            html: message,
-            attachments: [{
-                filename: 'postnord.jpg',
-                path: 'public/images/postnord.jpg',
-                cid: 'postnord_image' //same cid value as in the html img src
-            }]
+            html: message
+                // attachments: [{
+                //     filename: 'postnord.jpg',
+                //     path: 'public/images/postnord.jpg',
+                //     cid: 'postnord_image' //same cid value as in the html img src
+                // }]
         };
 
         transporter.sendMail(mailOptions, function(error, info) {
